@@ -3,13 +3,16 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPEN_AI_API_KEY,
+  apiKey: process.env.OPEN_AI_SECRET_KEY,
 });
 
 export const generateChatResponse = async (chatMessage) => {
   try {
     const response = await openai.chat.completions.create({
-      messages: [{ role: "system", content: "you are a helpful assistant" }, ...chatMessage],
+      messages: [
+        { role: "system", content: "you are a helpful assistant" },
+        ...chatMessage,
+      ],
       model: "gpt-3.5-turbo",
       temperature: 0,
     });

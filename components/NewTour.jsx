@@ -2,7 +2,11 @@
 import React from "react";
 import TourInfo from "./TourInfo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getExistingTour, generateTourResponse, createNewTour } from "../app/utils/action";
+import {
+  getExistingTour,
+  generateTourResponse,
+  createNewTour,
+} from "../app/utils/action";
 
 const newTour = () => {
   const queryClient = useQueryClient();
@@ -35,9 +39,10 @@ const newTour = () => {
   });
 
   const handleSubmit = (e) => {
-    e.preventDefualt();
+    e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const destination = Object.fromEntries(formData.entries());
+    console.log(destination);
     mutate(destination);
   };
 
@@ -49,8 +54,20 @@ const newTour = () => {
       <form onSubmit={handleSubmit} className="max-w-2xl">
         <h2 className="mb-4">Select your dream destination</h2>
         <div className="join w-full">
-          <input className="input input-bordered join-item w-full" type="text" required placeholder="city" name="city" />
-          <input className="input input-bordered join-item w-full" type="text" required placeholder="country" name="country" />
+          <input
+            className="input input-bordered join-item w-full"
+            type="text"
+            required
+            placeholder="city"
+            name="city"
+          />
+          <input
+            className="input input-bordered join-item w-full"
+            type="text"
+            required
+            placeholder="country"
+            name="country"
+          />
           <button className="btn btn-primary join-item" type="submit">
             GENERATE TOUR
           </button>
